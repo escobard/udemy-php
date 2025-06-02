@@ -42,3 +42,9 @@
 ## who uses php
 - used in very large companies, lik facebook, wikipedia. however, not very popular among faang companies
 - very popular with small to mid side companies, agencies and is popular with freelancers
+
+## php misc
+- allows you to use php in the terminal, php can run & execute php files in the terminal for review. Cool!
+- php -S localhost:port - runs php server in the root directory of the terminal
+  - expects index.php with at least something to render a website
+  - only works with php 7&8
