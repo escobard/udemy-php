@@ -10,3 +10,11 @@
 - They cannot start with a number.
 - They can only contain letters, numbers, and underscores.
 - They are case sensitive. So, `$name` and `$Name` are two different variables.
+
+## php data types
+- loosely typed, variable types can change on the fly
+
+## php misc
+- sometimes php bugs out on the browser, users are forced to close the tab & navigate to URL to get code to work
+- php re-runs once the browser is refreshed
+- sometimes VS code does not refresh errors until the php file is saved
