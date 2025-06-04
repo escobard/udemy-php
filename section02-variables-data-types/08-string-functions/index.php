@@ -1,5 +1,36 @@
 <?php
 $output = null;
+$string = 'Hello World';
+
+// outputs the length of a string
+$output = strlen($string);
+
+// outputs the number of words in a string
+$output = str_word_count($string);
+
+// outputs the position of the matching word in a string
+$output = strpos($string, 'World');
+
+// get specific character by string index
+$output = $string[4];
+
+// pass in the string, start position and length
+$output = substr($string, 6, 5);
+
+// replace a substring with something else
+$output = str_replace('World', 'Universe', $string);
+
+// make all characters in a string lowercase
+$output = strtolower($string);
+
+// make all characters in a string uppercase
+$output = strtoupper($string);
+
+// capitalize the first letter of each word
+$output = ucwords($string);
+
+// remove spaces from string
+$output = trim('         Hello World            ');
 ?>
 
 <!DOCTYPE html>
