@@ -1,5 +1,37 @@
 <?php
 $output = null;
+
+// helper function to create a date in PHP
+/// requires an argument to specify date format, defaults to todays date if no date is passed
+/// https://www.php.net/manual/en/function.date.php
+$output = date('Y');
+
+// get current month
+$output = date('m');
+
+// get current day
+$output = date('D');
+
+// get current hour
+$output = date('h');
+
+// get current minute
+$output = date('i');
+
+// get current second
+$output = date('s');
+
+// get year, month, day from date
+$output = date('Y-m-d');
+
+// can accept a unix timestamp which is convered to the provided format
+$output = date('Y', 936345600);
+
+// strtotime can be used to convery string date into a unix timestamp
+$output = date('Y', strtotime('1999-09-01'));
+
+// fully formatted date
+$output = date('Y-m-d h:i:s a');
 ?>
 
 <!DOCTYPE html>
