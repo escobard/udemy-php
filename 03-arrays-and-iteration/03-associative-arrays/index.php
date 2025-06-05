@@ -24,8 +24,8 @@ $output = $user['hobbies'][1];
 $user['address'] = '132 address';
 
 // removes value by key
-unset($user['address']);
 
+unset($user['address']);
 ?>
 
 <!DOCTYPE html>
