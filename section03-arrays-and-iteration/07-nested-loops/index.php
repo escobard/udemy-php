@@ -1,3 +1,23 @@
+<?php
+// basic syntax for nested for loops
+for ($i = 0; $i < 5; $i++) {
+  for ($j = 0; $j < 5; $j++) {
+    echo $i . ' - ' . $j . '<br>';
+  }
+};
+
+// basic syntax for nested while loops
+while ($i < 5) {
+  $j = 0;
+
+  while ($j < 5) {
+    $j++;
+  }
+
+  $i++;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,6 +46,14 @@
 
 <body>
   <div class="grid-container">
+    <!-- Basic shorthand for HTML inline nested for loops -->
+    <?php for ($i = 0; $i < 5; $i++): ?>
+      <?php for ($j = 0; $j < 5; $j++): ?>
+        <div class="grid-item">
+          <?= $i . ' - ' . $j ?>
+        </div>
+      <?php endfor; ?>
+    <?php endfor; ?>
   </div>
 </body>
 
