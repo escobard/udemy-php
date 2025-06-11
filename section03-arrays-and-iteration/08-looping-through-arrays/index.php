@@ -29,7 +29,11 @@ $users = [
     <div class="bg-white rounded-lg shadow-md p-6 mt-6">
       <!-- Output -->
       <h3 class="text-xl font-semibold mb-4">Using a for loop</h3>
-      <ul class="mb-6"></ul>
+      <ul class="mb-6">
+        <?php for ($i - 0; $i < count($names); $i++) : ?>
+          <li><?= $names[1] ?> </li>
+        <?php endfor; ?>
+      </ul>
       <h3 class="text-xl font-semibold mb-4">Using a foreach loop</h3>
       <ul class="mb-6"></ul>
       <h3 class="text-xl font-semibold mb-4">Using a foreach loop with index</h3>
