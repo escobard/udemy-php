@@ -8,7 +8,14 @@
   4. Get the amount of numbers in the array and put into a variable.
   5. Print out 'The sum of the {amount} numbers is: {sum} '. For example, if the array is [1, 2, 3, 4, 5], the output should be 'The sum of the 5 numbers is: 15'. 
 */
-echo '<h3>Sum Of An Array</h3>';
+
+$numbers = [1, 2, 3, 4, 5, 6, 7];
+$numbersSum = array_sum($numbers);
+$numbersCount = count($numbers);
+
+echo "<h3>Sum Of An Array</h3>";
+echo "<p>The sum of the $numbersCount numbers is: $numbersSum </p>";
+
 
 /*
   Challenge 2: Colors array
@@ -25,6 +32,19 @@ echo '<h3>Colors Array</h3>';
 
 $colors = ['red', 'blue', 'green', 'yellow'];
 
+$rcolors = array_reverse($colors);
+
+array_push($rcolors, 'purple', 'orange');
+
+// can also use array merge to add multiple values to the end of an array
+$merge = array_merge($colors, ['purple', 'orange']);
+
+$rcolors[1] = 'pink';
+
+array_pop($rcolors);
+
+print_r($rcolors);
+
 /*
   Challenge 3: Job listings array
 
@@ -35,3 +55,45 @@ $colors = ['red', 'blue', 'green', 'yellow'];
 */
 
 echo '<h3>Job Listings</h3>';
+
+$jobListings = [
+  [
+    'id' => '12345',
+    'job_title' => 'Developer',
+    'company' => 'Microsoft',
+    'contact_email' => 'test@test.com',
+    'contact_phone' => '1234567',
+    'skills' => ['PHP', 'MySQL', 'JS', 'HTML']
+  ],
+  [
+    'id' => '12345',
+    'job_title' => 'Developer',
+    'company' => 'Microsoft',
+    'contact_email' => 'test@test.com',
+    'contact_phone' => '1234567',
+    'skills' => ['PHP', 'MySQL', 'JS', 'HTML']
+  ],
+  [
+    'id' => '12345',
+    'job_title' => 'Developer',
+    'company' => 'Microsoft',
+    'contact_email' => 'test@test.com',
+    'contact_phone' => '1234567',
+    'skills' => ['PHP', 'MySQL', 'JS', 'HTML']
+  ]
+];
+
+array_push(
+  $jobListings,
+  [
+    'id' => '12345',
+    'job_title' => 'Developer',
+    'company' => 'Microsoft',
+    'contact_email' => 'test@test.com',
+    'contact_phone' => '1234567',
+    'skills' => ['Python', 'MySQL', 'JS', 'HTML']
+  ]
+);
+
+print_r($jobListings[1]['job_title']);
+print_r($jobListings[2]['skills'][0]);
