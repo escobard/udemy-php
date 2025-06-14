@@ -1,3 +1,7 @@
+<?php
+$isLoggedIn = true;
+$name = null;
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,8 +20,28 @@
   </header>
   <div class="container mx-auto p-4 mt-4">
     <div class="bg-white rounded-lg shadow-md p-6 mt-6">
-      <!-- Output -->
-      <h1 class="text-3xl">Welcome</h1>
+      <!-- using nested if statements (messy) -->
+      <?php if ($isLoggedIn) : ?>
+        <h1 class="text-3xl">Welcome</h1>
+        <!-- isset can be used to check if a variable has a value (is not null) -->
+        <?php if (isset($name)) : ?>
+          <h2 class="text-2xl"><?= $name ?></h1>
+          <?php else : ?>
+            <h2 class="text-2xl">Please set your name</h1>
+            <?php endif ?>
+          <?php else : ?>
+            <h1 class="text-3xl">Please login</h1>
+          <?php endif ?>
+
+          <!-- using comparison if statements -->
+          <?php if ($isLoggedIn && $name): ?>
+            <h1 class="text-3xl">Welcome <?= $name ?> </h1>
+          <?php elseif ($isLoggedIn) : ?>
+            <h1 class="text-3xl">Welcome to the App</h1>
+            <h2 class="text-3xl">Please set your name</h1>
+            <?php else : ?>
+              <h1 class="text-3xl">Please login</h1>
+            <?php endif ?>
     </div>
   </div>
 </body>
