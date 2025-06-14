@@ -10,3 +10,11 @@ Names Challenge:
 */
 
 $names = ['Alex', 'Beth', 'Caroline', 'Dave', 'Elanor', 'Anna', 'Freddie', 'Adam'];
+
+foreach ($names as $index => $name) {
+  if ($name[0] === 'A') {
+    continue;
+  }
+
+  echo strtolower(strrev($name)) . '<br>';
+}
