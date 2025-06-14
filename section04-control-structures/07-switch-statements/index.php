@@ -25,11 +25,11 @@ switch ($dayOfWeek) {
     break;
   case 'Saturday':
     $message = "Have a nice Weekend!";
-    $color = 'yellow';
+    $color = 'magenta';
     break;
   case 'Sunday':
     $message = "Have a nice Weekend!";
-    $color = 'yellow';
+    $color = 'magenta';
     break;
 }
 ?>
@@ -47,7 +47,7 @@ switch ($dayOfWeek) {
     body {
       font-family: 'Roboto', sans-serif;
       background-color: <?= $color ?>;
-      color: black;
+      color: white;
       display: flex;
       justify-content: center;
       align-items: center;
