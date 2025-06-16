@@ -41,6 +41,21 @@ $listings = [
     'tags' => []
   ],
 ];
+
+function formatSalary(int $salary): string
+{
+  // easily format ints into currency with number_format() - https://www.php.net/manual/en/function.number-format.php
+  return '$' . number_format($salary);
+};
+
+function highlightTags(array $tags, string $term)
+{
+  $tagString = implode(', ', $tags);
+  return str_replace($term, "<span class='bg-yellow-200'>$term</span>", $tagString);
+};
+
+highlightTags($listings[0]['tags'], 'Python')
+
 ?>
 
 
@@ -69,7 +84,7 @@ $listings = [
             <p class="text-gray-700 text-lg mt-2"><?= $job['description'] ?></p>
             <ul class="mt-4">
               <li class="mb-2">
-                <strong>Salary:</strong> <?= $job['salary'] ?>
+                <strong>Salary:</strong> <?= formatSalary($job['salary']) ?>
               </li>
               <li class="mb-2">
                 <strong>Location:</strong> <?= $job['location'] ?>
@@ -78,7 +93,7 @@ $listings = [
               </li>
               <?php if (!empty($job['tags'])) : ?>
                 <li class="mb-2">
-                  <strong>Tags:</strong> <?= implode(', ', $job['tags']) ?>
+                  <strong>Tags:</strong> <?= highlightTags($job['tags'], 'SEO') ?>
                 </li>
               <?php endif; ?>
             </ul>
