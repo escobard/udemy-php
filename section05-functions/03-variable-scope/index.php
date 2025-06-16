@@ -13,4 +13,4 @@ function sayHello()
   echo 'Hello ' . $name;
 }
 
-ssayHello();
+sayHello();
