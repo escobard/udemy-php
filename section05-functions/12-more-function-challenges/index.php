@@ -24,7 +24,7 @@ $names = ['bob', 'jay', 'jim', 'lin', 'dan'];
 function printNamesToUpperCase(array $names): void
 {
   foreach ($names as $name) {
-    echo strtoupper($name . ', ');
+    echo strtoupper($name . '<br>');
   }
 }
 
