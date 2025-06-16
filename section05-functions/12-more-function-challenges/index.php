@@ -38,3 +38,21 @@ echo '<br>';
   2. The function should return the longest word in the sentence.
   3. The output should look like this:
 */
+
+$sentence = 'It is a Monday';
+
+function findLongestWord(string $sentence): void
+{
+  $arrayOfWords = explode(' ', $sentence);
+  $longestWordLength = 0;
+  $longestWord = '';
+  foreach ($arrayOfWords as $word) {
+    $wordLength = strlen($word);
+    if ($wordLength > $longestWordLength) {
+      $longestWord = $word;
+    }
+  }
+  echo $longestWord;
+}
+
+findLongestWord($sentence);
