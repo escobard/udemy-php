@@ -6,6 +6,12 @@
   The formula to convert Fahrenheit to Celsius is: Celsius = (Fahrenheit - 32) * 5/9
 */
 
+const BASE_TEMP = 32;
+
+$fahrenheitToCelsius = fn($fahrenheit) => ($fahrenheit - BASE_TEMP) * 5 / 9;
+
+echo $fahrenheitToCelsius(92);
+
 echo '<br>';
 
 /*
