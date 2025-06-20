@@ -1,63 +1,19 @@
 <?php
 
-// basic PHP class syntax
-class User
+class MathUtility
 {
-  // define properties
-  public $name;
-  public $email;
-  protected $status = 'active';
+  public static $pi = 3.14;
 
-  // define constructor and required class arguments
-  public function __construct(string $name, string $email)
+  public static function add(...$nums)
   {
-    // call internal properties/methods with $this keyword
-    $this->name = $name;
-    $this->email = $email;
-  }
-
-  // define method
-  public function login()
-  {
-    echo $this->name . ' logged in';
+    return array_sum($nums);
   }
 }
 
-class Admin extends User
-{
-  public $level;
-  public function __construct(string $name, string $email, int $level)
-  {
-    $this->level = $level;
-    // pass values to parent class constructor
-    parent::__construct($name, $email);
-  }
-  // call properties inherited from the parent
-  public function getStatus()
-  {
-    echo $this->status;
-  }
+// traditional way to instantiate a class and call class property
+// $mathUtil1 = new MathUtility();
+// echo $mathUtil1->pi;
 
-  // overwrite parent methods (example of polymorphism)
-  public function login()
-  {
-    echo 'Admin' . $this->name . ' logged in';
-  }
-}
-
-// Instantiate a new class object
-$user1 = new User('John Doe', 'john@test.com');
-
-// update class properties
-$user1->name = 'John Doe';
-$user1->email = 'john@test.com';
-
-// invoke class methods
-$user1->login();
-
-// var_dump($user1);
-
-$admin = new Admin('Tom', 'tom@test.com', 9);
-
-var_dump($admin);
-$admin->getStatus();
+// call a static class method
+echo MathUtility::$pi . '<br>';
+echo MathUtility::add(1, 2, 3, 4);
