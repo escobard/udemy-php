@@ -42,6 +42,8 @@ $listings = [
   ],
 ];
 
+$validLocations = ['Chicago', 'San Francisco', 'New York', 'Seattle'];
+
 function formatSalary($salary)
 {
   return '$' . number_format($salary, 2);
@@ -68,6 +70,29 @@ function calculateAverageSalary($listings)
 
   return formatSalary($averageSalary);
 }
+
+// using an approach like this is ideal for security, where the query url is not actually echoed / executed, but its value is checked to perform conditional logic
+function filterListingsByLocation($listings, $location)
+{
+  return array_filter($listings, function ($job) use ($location) {
+    // matches two case instensitive values
+    /// returns a 0 if it is a match
+    return strcasecmp($job['location'], $location) === 0;
+  });
+}
+
+// check if location query string is there
+if (
+  isset($_GET['location']) &&
+  // check to ensure that the location is in the list of allowed locations before executing code further - good for security with super globals
+  in_array($_GET['location'], $validLocations)
+) {
+  $location = $_GET['location'];
+
+  $filteredListings = filterListingsByLocation($listings, $location);
+} else {
+  $filteredListings = $listings;
+}
 ?>
 
 
@@ -92,7 +117,7 @@ function calculateAverageSalary($listings)
       <h2 class="text-2xl font-semibold mb-4">Average Salary: <?= calculateAverageSalary($listings)  ?></h2>
     </div>
     <!-- Output -->
-    <?php foreach ($listings as $index => $job) : ?>
+    <?php foreach ($filteredListings as $index => $job) : ?>
       <div class="md my-4">
         <div class="rounded-lg shadow-md <?= $index % 2 === 0 ? 'bg-blue-100' : 'bg-white'; ?>">
           <div class="p-4">
