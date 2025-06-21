@@ -1,3 +1,31 @@
+<?php
+// set environment variable
+// it's more common to place DB credentials in constants and use those instead of super globals
+putenv('DB_HOST=localhost');
+putenv('DB_USER=root');
+
+// get environment variable
+$host = getenv('DB_HOST');
+$user = getenv('DB_USER');
+
+// returns all environment variables in your system, lots of environment variables are available by default
+// var_dump(getenv())
+
+// global variable, all variables created outside of function scope are considered global by PHP
+$foo = 'Global variable';
+
+function test()
+{
+  $foo = 'Local variable';
+  // global variables can be accesed by passing in the key as the variable name
+  echo 'Global variable: ' . $GLOBALS['foo'] . '<br>';
+  echo 'Local variable: ' . $foo;
+}
+
+test();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,11 +43,12 @@
 
       <div class="bg-gray-200 p-4 rounded-lg">
         <strong class="block mb-2">DB Host:</strong>
+        <?= $host ?>
 
       </div>
       <div class="bg-gray-200 p-4 rounded-lg">
         <strong class="block mb-2">DB User:</strong>
-
+        <?= $user ?>
       </div>
 
     </div>
