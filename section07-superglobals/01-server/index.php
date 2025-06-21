@@ -1,22 +1,41 @@
 <?php
 // Common server variables:
-$requestMethod = '';
-$serverProtocol = '';
-$serverName = '';
-$serverPort = '';
-$serverSoftware = '';
-$serverAdmin = '';
-$documentRoot = '';
-$scriptFilename = '';
-$scriptName = '';
-$phpSelf = '';
-$remoteAddr = '';
-$connection = '';
-$host = '';
-$referer = '';
-$userAgent = '';
-$queryString = '';
-$requestUri = '';
+/// global variables are persisted between refreshes
+
+// determines what request method was last used (eg, GET/POST)
+$requestMethod = $_SERVER['REQUEST_METHOD'];
+// determines the protocol - HTTP/HTTPS etc
+$serverProtocol = $_SERVER['SERVER_PROTOCOL'];
+// name of the server - in this case localhost
+$serverName = $_SERVER['SERVER_NAME'];
+// server port
+$serverPort = $_SERVER['SERVER_PORT'];
+// software of server, since it's hosted with PHP, it will return PHP version
+$serverSoftware = $_SERVER['SERVER_SOFTWARE'];
+// return server admin if there is an admin
+$serverAdmin = $_SERVER['SERVER_ADMIN'];
+// returns root path
+$documentRoot = $_SERVER['DOCUMENT_ROOT'];
+// path of running script
+$scriptFilename = $_SERVER['SCRIPT_FILENAME'];
+// name of the file running this code
+$scriptName = $_SERVER['SCRIPT_NAME'];
+
+$phpSelf = $_SERVER['PHP_SELF'];
+// IP address of requester
+$remoteAddr = $_SERVER['REMOTE_ADDR'];
+// type of connection being used - keep-alive / closed
+$connection = $_SERVER['HTTP_CONNECTION'];
+// server name + server post
+$host = $_SERVER['HTTP_HOST'];
+// restores URL of referring back (linkbacks/linkforward)
+$referer = $_SERVER['HTTP_REFERER'];
+// returns browser and OS of the user
+$userAgent = $_SERVER['HTTP_USER_AGENT'];
+// URL query(s)
+$queryString = $_SERVER['QUERY_STRING'];
+// returns the full URI of the request
+$requestUri = $_SERVER['REQUEST_URI'];
 
 ?>
 
