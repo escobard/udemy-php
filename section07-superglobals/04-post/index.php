@@ -1,3 +1,35 @@
+<?php
+// $_POST['KEY'] to retrieve data from form
+///  isset($_POST['submit'] key matches the button name to check if form was submitted 
+
+// insecure implementation
+// if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
+//   $title = $_POST['title'];
+//   $description = $_POST['description'];
+
+//   // IMPORTANT - this code is very dangerous, as it executes form input values without sanitizing them
+//   echo $title . ', ' . $description;
+// }
+
+$title = '';
+$description = '';
+$submitted = false;
+
+// secure implementation
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
+  $title = isset($_POST['title']) ?
+    // converts special characters to HTML - turns script tags into plain text/string
+    htmlspecialchars($_POST['title']) :
+    '';
+
+  $description = isset($_POST['description']) ?
+    htmlspecialchars($_POST['description']) :
+    '';
+
+  $submitted = true;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,6 +44,7 @@
   <div class="flex justify-center items-center h-screen">
     <div class="bg-white p-8 rounded shadow-md w-full max-w-md">
       <h1 class="text-2xl font-semibold mb-6">Create Job Listing</h1>
+      <!-- can use the action attribute to determine what php file to execute, or leave empty for php in this file to process form submission -->
       <form method="post">
         <div class="mb-4">
           <label for="title" class="block text-gray-700 font-medium">Title</label>
@@ -30,6 +63,19 @@
       </form>
 
       <!-- Display submitted data -->
+      <?php if ($submitted) : ?>
+        <div class="mt-6 p-4 border rounded bg-gray-200">
+          <h2 class="text-lg font-semibold">Submitted Job Listing:</h2>
+          <p>
+            <strong>Title:</strong>
+            <?= $title ?>
+          </p>
+          <p>
+            <strong>Description:</strong>
+            <?= $description ?>
+          </p>
+        </div>
+      <?php endif; ?>
     </div>
   </div>
 </body>
