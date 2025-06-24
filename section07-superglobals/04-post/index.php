@@ -28,6 +28,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
 
   $submitted = true;
 }
+
+// instructor recommends NOT to use $_REQUEST superglobal, but teaching for legacy purposes
+/// $_REQUEST superglobal is a catch all for all requests and their paramters, there may be conflicts if multiple GET/POST requests with same keys are sent
+echo $_REQUEST['name'] ?? '';
 ?>
 
 <!DOCTYPE html>

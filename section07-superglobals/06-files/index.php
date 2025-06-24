@@ -1,11 +1,52 @@
 <?php
 $title = '';
 $description = '';
-$submitted = false; 
+$submitted = false;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
   $title = htmlspecialchars($_POST['title'] ?? '');
   $description = htmlspecialchars($_POST['description'] ?? '');
+
+  // $_FILES has an array of objects, each object contains file name, path, type temp name, error and size
+  /// key for superglobal is the form field name for file upload
+  $file = ($_FILES['logo']);
+
+  // ensures file upload had no error
+  if ($file['error'] === UPLOAD_ERR_OK) {
+    // specify the directory of where to store the file
+    $uploadDir = 'uploads/';
+
+    // if no directory exists, create it with correct permissions
+    if (!is_dir($uploadDir)) {
+      mkdir($uploadDir, 0755, true);
+    }
+
+    // create file name
+    /// uniqid() lets you create a uuid with PHP
+    $filename = uniqid() . '-' . $file['name'];
+
+    // checks file type, only allows jpg images
+    $allowedExtensions = ['jpg', 'png'];
+    $fileExtension = strtolower(
+      // pathinfo function returns filepath information, in this case we only care about the file extension
+      pathinfo($filename, PATHINFO_EXTENSION)
+    );
+
+    // checks if file has the correct extension
+    if (in_array($fileExtension, $allowedExtensions)) {
+      // moves file into the directory we just created (required step in PHP)
+      if (move_uploaded_file($file['tmp_name'], $uploadDir . $filename)) {
+        echo 'File uploaded!';
+      } else {
+        echo 'File upload error: ' . $file['error'];
+      }
+    } else {
+      echo 'Invalid file type';
+    }
+
+
+    echo $filename;
+  }
 
   $submitted = true;
 }
