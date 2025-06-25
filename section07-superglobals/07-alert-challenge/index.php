@@ -26,8 +26,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     $hasErrors = true;
   }
 
-  $submitted = !$hasErrors;
-
   $file = $_FILES['logo'];
 
   if ($file['error'] === UPLOAD_ERR_OK) {
