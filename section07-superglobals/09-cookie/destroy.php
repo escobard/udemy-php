@@ -1,3 +1,13 @@
+<?php
+
+// destroys a cookie with PHP
+// this logic does not work on chrome, only on mozilla
+setcookie('username', '', time() - 3600, '/');
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 

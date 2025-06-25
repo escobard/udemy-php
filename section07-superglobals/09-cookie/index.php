@@ -1,3 +1,10 @@
+<?php
+
+// create a cookie with PHP
+setcookie('username', 'Jon', time() + 3600, '/');
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
