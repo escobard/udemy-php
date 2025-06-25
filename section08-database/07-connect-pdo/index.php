@@ -1,25 +1,50 @@
 <?php
+require_once 'database.php';
 
-// https://www.php.net/manual/en/class.pdo.php
-// use PHP PDO class to connect your PHP application to a database server
-$host = 'localhost';
-$port = 3306;
-$dbName = 'blog';
-$username = 'phpapp';
-$password = 'phpapp';
+// Prepare a SELECT statement
+/// pdo uses prepare statements, meaning query has to be declared then executed (to prevent injections)
+$stmt = $pdo->prepare('SELECT * FROM posts');
 
-// string that with associated dta structure used to describe a connection to a data source
-/// https://en.wikipedia.org/wiki/Data_source_name 
-$dsn = "mysql:host={$host};port={$port};dbname={$dbName};charset=utf8";
+// Execute the statement
+/// pdo requires users to prepare + execute query to run the SQL query
+$stmt->execute();
 
-// basic try/catch syntax with PHP
-try {
-  // create PDO instance
-  $pdo = new PDO($dsn, $username, $password);
+// Fetch the results
+$posts = $stmt->fetchAll();
 
-  // set PDO to throw exceptions on error
-  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  echo 'Database connected...';
-} catch (PDOException $e) {
-  echo 'Connection Failed: ' . $e->getMessage();
-}
+// echo '<pre>';
+// print_r($posts);
+// echo '</pre>';
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Blog</title>
+</head>
+
+<body class="bg-gray-100">
+  <header class="bg-blue-500 text-white p-4">
+    <div class="container mx-auto">
+      <h1 class="text-3xl font-semibold">My Blog</h1>
+    </div>
+  </header>
+  <div class="container mx-auto p-4 mt-4">
+    <?php foreach ($posts as $post) : ?>
+      <div class="md my-4">
+        <div class="rounded-lg shadow-md">
+          <div class="p-4">
+            <h2 class="text-xl font-semibold"><?= $post['title'] ?></h2>
+            <p class="text-gray-700 text-lg mt-2"><?= $post['body'] ?></p>
+          </div>
+        </div>
+      </div>
+    <?php endforeach; ?>
+  </div>
+</body>
+
+</html>
