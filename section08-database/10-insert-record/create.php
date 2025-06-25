@@ -1,3 +1,30 @@
+<?php
+
+require_once 'database.php';
+
+// extracts data from the form once the form submits a post request to PHP server
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
+  $title = htmlspecialchars($_POST['title']);
+  $body = htmlspecialchars($_POST['body']);
+
+  // prepare SQL query
+  $sql = 'INSERT INTO posts (title, body) VALUES(:title, :body)';
+
+  $stmt = $pdo->prepare($sql);
+  $params = [
+    'title' => $title,
+    'body' => $body
+  ];
+
+  $stmt->execute($params);
+
+  // redirect back home
+  header('Location: index.php');
+  exit;
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
