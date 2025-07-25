@@ -5,11 +5,6 @@ loadPartial('head');
 loadPartial('navbar');
 loadPartial('showcase-search');
 loadPartial('top-banner');
-?>
-
-
-<?php
+loadPartial('listings');
 loadPartial('top-banner');
 loadPartial('footer');
-
-?>
