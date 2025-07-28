@@ -17,12 +17,17 @@ function basePath($path = '')
  * @param string $name
  * @return void
  */
-function loadView($name)
+function loadView($name, $data = [])
 {
-
   $viewPath = basePath("views/{$name}.view.php");
 
   if (file_exists($viewPath)) {
+    // https://www.php.net/manual/en/function.extract.php
+    // extracts array values into the provided array key 
+    /// in this case, extracts array values into the variable 'listings'
+    /// would be the same as doing $listings = $data[0];
+    /// works with multiple array keys, allowing for easier syntax access
+    extract($data);
     require $viewPath;
   } else {
     echo "View '{$name} not found!'";
@@ -70,4 +75,16 @@ function inspectAndDie($value)
   var_dump($value);
   echo '<pre>';
   die();
+}
+
+/**
+ * Format Salary
+ * 
+ * @param string $salary
+ * @return string 
+ */
+
+function formatSalary($salary)
+{
+  return '$' . number_format(floatval($salary));
 }

@@ -10,4 +10,4 @@ $listings = $db->query('
 
 // inspect($listings);
 
-loadView('home');
+loadView('home', ['listings' => $listings]);

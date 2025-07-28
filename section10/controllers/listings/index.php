@@ -1,3 +1,12 @@
 <?php
 
-loadView('listings/index');
+$config = require basePath('config/db.php');
+$db = new Database($config);
+
+$listings = $db->query('
+  SELECT * FROM workopia.listings;
+')->fetchAll();
+
+// inspect($listings);
+
+loadView('listings/index', ['listings' => $listings]);
