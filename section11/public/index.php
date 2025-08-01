@@ -3,8 +3,17 @@
 // imports all the content from a specific file
 require '../helpers.php';
 
-require basePath('Framework/Router.php');
-require basePath('Framework/Database.php');
+// built in PHP function for custom autoloaders
+/// class argument seemingly looks for all php files that start with Uppercase (which is usually a class file)
+spl_autoload_register(function ($class) {
+
+  $path = basePath('Framework/' . $class . '.php');
+
+  // checks if the path exists, then if it does, import the file
+  if (file_exists($path)) {
+    require $path;
+  }
+});
 
 // needs to be instantiated prior to getting routes.php, because routes.php requires $router variable to contain valid router class
 $router = new Router();
