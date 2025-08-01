@@ -1,5 +1,13 @@
 <?php
 
+// namespaces in PHP are a way to categorize common code together
+/// namespeaces can be used in autoloaders and in other codes when importing dependencies
+
+namespace Framework;
+
+/// when using namespaces and using libraries outside of the namespace, libraries imports must also be explicitely declared
+use PDO;
+
 class Database
 {
   public $connection;

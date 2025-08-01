@@ -6,6 +6,9 @@ require __DIR__ . '/../vendor/autoload.php';
 // imports all the content from a specific file
 require '../helpers.php';
 
+// import files under a namespace
+use Framework\Router;
+
 // // built in PHP function for custom autoloaders
 // /// class argument seemingly looks for all php files that start with Uppercase (which is usually a class file)
 // spl_autoload_register(function ($class) {
