@@ -1,5 +1,5 @@
 <?php
-
+$router->get('/', 'HomeController@index');
 // in PHP you can use dependencies without requiering them into the file, but the file that invokes the code must have the dependency
 $router->get('/', 'controllers/home.php');
 $router->get('/listings', 'controllers/listings/index.php');

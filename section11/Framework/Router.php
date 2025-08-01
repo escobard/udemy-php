@@ -11,16 +11,20 @@ class Router
    *
    * @param string $method
    * @param string $uri
-   * @param string $controller
+   * @param string $action
    * @return void
    */
 
-  public function registerRoute($method, $uri, $controller)
+  public function registerRoute($method, $uri, $action)
   {
+    // php list assigns the defined variable to index key positions
+    list($controller, $controllerMethod) = explode('@', $action);
+
     $this->routes[] = [
       'method' => $method,
       'uri' => $uri,
-      'controller' => $controller
+      'controller' => $controller,
+      'controllerMethod' => $controllerMethod
     ];
   }
 
@@ -100,7 +104,13 @@ class Router
   {
     foreach ($this->routes as $route) {
       if ($route['uri'] === $uri && $route['method'] === $method) {
-        require basePath('App/' . $route['controller']);
+        // define namespace for controllers
+        $controller = "App\\Controllers\\" . $route['controller'];
+        $controllerMethod = $route['controllerMethod'];
+
+        // instantiate controller and invoke method
+        $controllerInstance = new $controller();
+        $controllerInstance->$controllerMethod();
         return;
       }
     }
