@@ -2,15 +2,28 @@
 
 namespace App\Controllers;
 
+use Framework\Database;
+
 class HomeController
 {
+
+  protected $db;
+
   public function __construct()
   {
-    die('HomeController');
+    $config = require basePath('config/db.php');
+
+    $this->db = new Database($config);
   }
 
   public function index()
   {
-    die('HomeController');
+    $listings = $this->db->query('
+      SELECT * FROM workopia.listings;
+    ')->fetchAll();
+
+    // inspect($listings);
+
+    loadView('home', ['listings' => $listings]);
   }
 }
