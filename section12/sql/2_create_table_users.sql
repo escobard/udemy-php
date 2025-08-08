@@ -1,0 +1,9 @@
+CREATE TABLE workopia.users (
+    id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    name VARCHAR(255),
+    email VARCHAR(255) NOT NULL,
+    password VARCHAR(255),
+    city VARCHAR(45),
+    state VARCHAR(45),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP() NOT NULL
+);
