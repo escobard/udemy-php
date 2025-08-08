@@ -32,11 +32,11 @@ class ListingController
     loadView('listings/create');
   }
 
-  public function show()
+  public function show($params)
   {
 
     // grab url id by using superglobal
-    $id = $_GET['id'] ?? '';
+    $id = $params['id'] ?? '';
 
     // prepare query arguments to prevent injections
     $params = [
