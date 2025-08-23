@@ -95,10 +95,12 @@ loadPartial('showcase-search');
           placeholder="Email Address For Applications"
           class="w-full px-4 py-2 border rounded focus:outline-none" />
       </div>
-      <button
-        class="w-full bg-green-500 hover:bg-green-600 text-white px-4 py-2 my-3 rounded focus:outline-none">
-        Save
-      </button>
+      <a href="/">
+        <button
+          class="w-full bg-green-500 hover:bg-green-600 text-white px-4 py-2 my-3 rounded focus:outline-none">
+          Save
+        </button>
+      </a>
       <a
         href="/"
         class="block text-center w-full bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded focus:outline-none">
