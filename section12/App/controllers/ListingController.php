@@ -68,6 +68,23 @@ class ListingController
     // can pass in the function name and arguments to array map, running the function on for each array item
     $newListingData = array_map('sanitize', $newListingData);
 
-    inspectAndDie($newListingData);
+    $requiredFields = ['title', 'description', 'email', 'city', 'state'];
+
+    $errors = [];
+
+    foreach ($requiredFields as $field) {
+      if (empty($newListingData[$field]) || !Validation::string($newListingData[$field])) {
+        $errors[$field] = ucfirst($field) . ' is required';
+      }
+    }
+
+    if (!empty($errors)) {
+      loadView('listings/create', [
+        'errors' => $errors,
+        'listing' => $newListingData
+      ]);
+    } else {
+      echo 'Success';
+    }
   }
 }
