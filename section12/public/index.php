@@ -1,5 +1,8 @@
 <?php
 
+// starts a session in PHP - not entirely clear what a session is in PHP
+session_start();
+
 // loads required packages from vendor
 require __DIR__ . '/../vendor/autoload.php';
 
