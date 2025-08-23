@@ -19,13 +19,10 @@ class ListingController
 
   public function index()
   {
-    inspectAndDie(Validation::email('test'));
 
     $listings = $this->db->query('
       SELECT * FROM workopia.listings;
     ')->fetchAll();
-
-    // inspect($listings);
 
     loadView('listings/index', ['listings' => $listings]);
   }
@@ -84,7 +81,33 @@ class ListingController
         'listing' => $newListingData
       ]);
     } else {
-      echo 'Success';
+      // submit data
+      $fields = [];
+
+      foreach ($newListingData as $field => $value) {
+        $fields[] = $field;
+      }
+
+      $fields = implode(', ', $fields);
+
+      $values = [];
+
+      foreach ($newListingData as $field => $value) {
+        // convert empty strings to null
+        if ($value === '') {
+          $newListingData[$field] = null;
+        }
+        $values[] = ':' . $field;
+      }
+
+      $values = implode(', ', $values);
+
+      $query = "INSERT INTO listings ({$fields}) VALUES ({$values})";
+
+      $this->db->query($query, $newListingData);
+
+      // redirect using PHP
+      redirect('/listings');
     }
   }
 }
