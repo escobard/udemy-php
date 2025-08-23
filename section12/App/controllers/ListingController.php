@@ -17,6 +17,11 @@ class ListingController
     $this->db = new Database($config);
   }
 
+  /**
+   * Show all listing
+   *
+   * @return void
+   */
   public function index()
   {
 
@@ -27,11 +32,22 @@ class ListingController
     loadView('listings/index', ['listings' => $listings]);
   }
 
+  /**
+   * Create a listing
+   *
+   * @return void
+   */
   public function create()
   {
     loadView('listings/create');
   }
 
+  /**
+   * Show a single listing
+   *
+   * @param array $params
+   * @return void
+   */
   public function show($params)
   {
 
@@ -65,7 +81,7 @@ class ListingController
     // can pass in the function name and arguments to array map, running the function on for each array item
     $newListingData = array_map('sanitize', $newListingData);
 
-    $requiredFields = ['title', 'description', 'email', 'city', 'state'];
+    $requiredFields = ['title', 'description', 'salary', 'email', 'city', 'state'];
 
     $errors = [];
 
@@ -109,5 +125,31 @@ class ListingController
       // redirect using PHP
       redirect('/listings');
     }
+  }
+
+  /**
+   * Delete a listing
+   * 
+   * @param array $params
+   * @return void
+   */
+  public function destroy($params)
+  {
+    $id = $params['id'];
+
+    $params = [
+      'id' => $id
+    ];
+
+    $listing = $this->db->query('SELECT * FROM listings WHERE id = :id', $params)->fetch();
+
+    if (!$listing) {
+      ErrorController::notFound('Listing not found');
+      return;
+    }
+
+    $this->db->query('DELETE FROM listings WHERE id = :id', $params);
+
+    redirect('/listings');
   }
 }
