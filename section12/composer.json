@@ -1,0 +1,16 @@
+{
+  "name": "escobard/udemy-php",
+  "description": "Job listing application",
+  "authors": [
+    {
+      "name": "Daniel Escobar",
+      "email": "unknown@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Framework\\": "Framework/",
+      "App\\": "App/"
+    }
+  }
+}
