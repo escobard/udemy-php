@@ -155,4 +155,26 @@ class ListingController
 
     redirect('/listings');
   }
+
+  /**
+   * Show listing edit form
+   *
+   * @param array $params
+   * @return void
+   */
+  public function edit($params)
+  {
+
+    // grab url id by using superglobal
+    $id = $params['id'] ?? '';
+
+    // prepare query arguments to prevent injections
+    $params = [
+      'id' => $id
+    ];
+
+    $listing = $this->db->query('SELECT * FROM workopia.listings WHERE id = :id', $params)->fetch();
+
+    loadView('listings/edit', ['listing' => $listing]);
+  }
 }
