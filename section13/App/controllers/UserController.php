@@ -148,4 +148,22 @@ class UserController
 
     redirect('/');
   }
+
+  /**
+   * Logout a user and kill session
+   * 
+   * @return void
+   */
+  public function logout()
+  {
+    Session::clearAll();
+
+    // retrieves session cookie params
+    $params = session_get_cookie_params();
+
+    // sets active cookie to in the past to expire it
+    setcookie('PHPSESSID', '', time() - 86400, $params['path'], $params['domain']);
+
+    redirect('/');
+  }
 }
