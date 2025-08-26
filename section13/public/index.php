@@ -1,16 +1,16 @@
 <?php
 
-// starts a session in PHP - not entirely clear what a session is in PHP
-session_start();
-
 // loads required packages from vendor
 require __DIR__ . '/../vendor/autoload.php';
 
-// imports all the content from a specific file
-require '../helpers.php';
-
 // import files under a namespace
 use Framework\Router;
+use Framework\Session;
+
+Session::start();
+
+// imports all the content from a specific file
+require '../helpers.php';
 
 // // built in PHP function for custom autoloaders
 // /// class argument seemingly looks for all php files that start with Uppercase (which is usually a class file)
