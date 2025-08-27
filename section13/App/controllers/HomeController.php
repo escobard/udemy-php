@@ -19,7 +19,7 @@ class HomeController
   public function index()
   {
     $listings = $this->db->query('
-      SELECT * FROM workopia.listings;
+      SELECT * FROM workopia.listings ORDER BY created_at DESC LIMIT 6;
     ')->fetchAll();
 
     // inspect($listings);
