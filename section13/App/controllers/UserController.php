@@ -165,5 +165,75 @@ class UserController
     setcookie('PHPSESSID', '', time() - 86400, $params['path'], $params['domain']);
 
     redirect('/');
+
+    /**
+     * Authenticate a user with email and password
+     * 
+     * @return void
+     */
+  }
+
+  public function authenticate()
+  {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    $errors = [];
+
+    if (!Validation::email($email)) {
+      $errors['email'] = 'Please enter a valid email';
+    }
+
+    if (!Validation::string($password, 6, 50)) {
+      $errors['password'] = 'Password must be at least 6 characters';
+    }
+
+    // route back to login page with errors
+    if (!empty($errors)) {
+      loadView(
+        'users/login',
+        ['errors' => $errors]
+      );
+      exit;
+    }
+
+    $params = [
+      'email' => $email
+    ];
+
+    $user = $this->db->query(
+      '
+        SELECT * FROM users
+        WHERE email = :email
+      ',
+      $params
+    )->fetch();
+
+    if (!$user) {
+      $errors['email'] = 'Incorrect credentials';
+      loadView(
+        'users/login',
+        ['errors' => $errors]
+      );
+    }
+
+    // check if database password hash matches provided value
+    if (!password_verify($password, $user['password'])) {
+      $errors['email'] = 'Incorrect credentials';
+      loadView(
+        'users/login',
+        ['errors' => $errors]
+      );
+    }
+
+    Session::set('user', [
+      'id' => $user['id'],
+      'name' => $user['name'],
+      'email' => $user['email'],
+      'city' => $user['city'],
+      'state' => $user['state']
+    ]);
+
+    redirect('/');
   }
 }
